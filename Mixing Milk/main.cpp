@@ -3,29 +3,33 @@
 
 using namespace std;
 
-vector<int> capacity(3);
-vector<int> amount(3);
-
-int TURN_MAX=100;
+int capacities[3];
+int amt_milk[3];
 
 int main(){
     freopen("mixmilk.in","r",stdin);
     freopen("mixmilk.out","w",stdout);
 
     for(int i=0;i<3;i++){
-        cin >> capacity[i] >> amount[i];
+        cin >> capacities[i] >> amt_milk[i];
     }
 
-    for(int i=0;i<TURN_MAX;i++){
-        int bucket_no_before=i%3;
-        int bucket_no_after=(i+1)%3;
+    for(int i=0;i<100;i++){
+        int starting_cup = i % 3;
+        int end_cup = (starting_cup+1) % 3;
 
-        int amt = min(amount[bucket_no_before],capacity[bucket_no_after]-amount[bucket_no_after]);
-
-        amount[bucket_no_before]-=amt;
-        amount[bucket_no_after]+=amt;
+        if(amt_milk[starting_cup]+amt_milk[end_cup] <= capacities[end_cup]){
+            amt_milk[end_cup]+=amt_milk[starting_cup];
+            amt_milk[starting_cup]=0;
+        }
+        else {
+            int pour_amt = capacities[end_cup]-amt_milk[end_cup];
+            amt_milk[end_cup]+=pour_amt;
+            amt_milk[starting_cup]-=pour_amt;
+        }
     }
-    for(auto milk : amount) {
-        cout << milk << '\n';
+
+    for(auto& amt : amt_milk){
+        cout << amt << '\n';
     }
 }

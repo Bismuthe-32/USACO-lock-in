@@ -1,7 +1,12 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
+
+using ll = long long;
+
+ll formula(ll x1, ll x2, ll y1, ll y2){
+    return (x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1);
+}
 
 int main() {
     ios::sync_with_stdio(false);
@@ -9,20 +14,18 @@ int main() {
 
     int N;
     cin >> N;
-    vector<int> x(N), y(N);
+    vector<ll> x(N), y(N);
     for (int i = 0; i < N; i++) cin >> x[i];
     for (int i = 0; i < N; i++) cin >> y[i];
 
-    long long maxDist = 0; // use long long to avoid overflow
+    ll maxDist = 0;
+
     for (int i = 0; i < N; i++) {
         for (int j = i + 1; j < N; j++) {
-            long long dx = x[i] - x[j];
-            long long dy = y[i] - y[j];
-            long long distSq = dx * dx + dy * dy;
-            maxDist = max(maxDist,distSq);
+            ll dist = formula(x[i], x[j], y[i], y[j]);
+            maxDist = max(maxDist, dist);
         }
     }
 
     cout << maxDist << "\n";
-    return 0;
 }
