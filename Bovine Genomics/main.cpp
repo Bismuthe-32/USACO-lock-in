@@ -19,26 +19,15 @@ int main() {
 
     // Check each column
     for (int col = 0; col < M; col++) {
-        bool ok = true;
-
-        // Collect characters in sets
-        unordered_set<char> S, P;
-        for (int i = 0; i < N; i++) {
-            S.insert(spotty[i][col]);
-            P.insert(plain[i][col]);
-        }
-
-        // Check intersection
-        for (char c : S) {
-            if (P.count(c)) {
-                ok = false;
-                break;
+        bool intersection_exists = false; //If intersection does not exist, then increase count
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                if(spotty[i][col]==plain[j][col]){
+                    intersection_exists=true;
+                }
             }
         }
-
-        if (ok) answer++;
+        if(!intersection_exists)answer++;
     }
-
-    cout << answer << "\n";
-    return 0;
+    cout<<answer<<'\n';
 }

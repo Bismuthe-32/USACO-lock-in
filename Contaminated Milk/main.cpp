@@ -1,6 +1,7 @@
-#include <vector>
 #include <iostream>
+#include <bits/stdc++.h>
 #include <set>
+
 using namespace std;
 
 int main(){

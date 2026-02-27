@@ -30,7 +30,7 @@ int main(){
         lb = 0;
         ub = candyHeights[i];
         for(ll j=0;j<N;j++){
-
+            if(lb==ub) break;
             int change = min(ub-lb, max(0LL,cowHeights[j]-lb));
             cowHeights[j]+=change;
             lb+=change;
